@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <center><button onclick="loadTabs()">Load Tabs</button></center>
+    <center><input type="text" id="url" /></center>
+    <center><button onclick="addTab()">Add Tab</button></center>
+    <center><button onclick="clearTabs()">Clear</button></center>
+  </body>
+  <script>
+    async function loadTabs() {
+      tabs = await fetch("https://192.168.1.71:3000/links", {
+        method: "GET",
+      }).then(async function (tabs) {
+        var links = await tabs.json();
+        for (var i = 0; i < links.length; i++) {
+          console.log(links[i]);
+          window.open(links[i], "_blank");
+        }
+      });
+    }
+
+    async function addTab(tab) {
+      const url = document.getElementById("url").value;
+      fetch("https://192.168.1.71:3000/links", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ url }),
+      });
+      clearInput();
+    }
+
+    async function clearTabs() {
+      fetch("https://192.168.1.71:3000/clear", {
+        method: "GET",
+      });
+    }
+
+    function clearInput() {
+      document.getElementById("url").value = "";
+    }
+    //body: JSON.stringify({ link: document.getElementById("url").value }),
+  </script>
+</html>
