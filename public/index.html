@@ -13,7 +13,7 @@
   </body>
   <script>
     async function loadTabs() {
-      tabs = await fetch("https://192.168.1.71:3000/links", {
+      tabs = await fetch("https://tabs-mover.onrender.com/links", {
         method: "GET",
       }).then(async function (tabs) {
         var links = await tabs.json();
@@ -26,7 +26,7 @@
 
     async function addTab(tab) {
       const url = document.getElementById("url").value;
-      fetch("https://192.168.1.71:3000/links", {
+      fetch("https://tabs-mover.onrender.com/links", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -37,7 +37,7 @@
     }
 
     async function clearTabs() {
-      fetch("https://192.168.1.71:3000/clear", {
+      fetch("https://tabs-mover.onrender.com/clear", {
         method: "GET",
       });
     }
