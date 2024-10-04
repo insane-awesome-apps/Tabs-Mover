@@ -16,12 +16,6 @@ app.use(
   })
 );
 
-const options = {
-  key: fs.readFileSync("server.key"),
-  cert: fs.readFileSync("server.crt"),
-};
-
-
 
 let links = [];
 
@@ -41,6 +35,6 @@ app.get("/clear", (req, res) => {
     console.log(links);
 })
 
-https.createServer(options, app).listen(port, () => {
-  console.log("Server running on https://192.168.1.71:3000");
-});
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+})
